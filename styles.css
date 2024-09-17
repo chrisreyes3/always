@@ -1,0 +1,250 @@
+body {
+    font-family: Arial, sans-serif;
+ /* qr */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* margin: 0; */
+    /* padding: 0; */
+    /* height: 100vh; */
+    /* box-sizing: border-box; */
+    /* text-align: center; */
+    /* background: rgb(128 0 0 / 66%); */
+/* qr */
+    /* background-image: url('ocean.jpg'); */
+    background-size: cover; /* Ensure the background image covers the entire page */
+    background-repeat: repeat-y; /* Prevent the image from repeating */
+    background-position: center; /* Center the image */
+}
+
+.icon-img {
+    width: 20px; /* Adjust width of the icon */
+    height: 20px; /* Adjust height of the icon */
+    vertical-align: middle; /* Align icon with the text */
+    margin-right: 5px; /* Space between the icon and the text */
+  }
+
+.sales-report-header {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Align heading and GIF vertically */
+    margin-top: 20px;        /* Optional: Add some space at the top */
+  }
+
+  .sales-report-header h2 {
+    margin-right: 10px; /* Space between heading and GIF */
+  }
+
+  .sales-report-header img {
+    width: 50px; /* Adjust GIF size */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+.shadow-label {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adjust shadow as needed */
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.highlight-label {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #026983;
+    padding: 1em;
+}
+
+.navbar button {
+    background-color: #026983;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    background-color: #026983;
+}
+
+.tab-content {
+    display: none;
+    padding: 1em;
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    max-width: 600px;
+    margin: auto;
+}
+
+form label {
+    display: block;
+    margin: 0.5em 0 0.2em;
+}
+
+form input, form select, form button {
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.2em 0;
+}
+
+
+/* bigger form button */
+form button {
+    font-size: 1.2em; /* Increase font size */
+    padding: 10px 20px; /* Increase padding */
+    background-color: #026983; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: flex; /* Use flexbox to align icon and text */
+    align-items: center; /* Center align icon and text vertically */
+    justify-content: center; /* Center align icon and text horizontally */
+}
+
+form button i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+form button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+table, th, td {
+    border: 1px solid black;
+    width: 50%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: left;
+}
+
+.no-print {
+    text-align: center;
+}
+
+.non-active {
+    color: red;
+}
+
+#my-qr-reader {
+    padding: 20px !important;
+    border: 1.5px solid #b2b2b2 !important;
+    border-radius: 8px;
+}
+
+#my-qr-reader img[alt="Info icon"] {
+    display: none;
+}
+
+#my-qr-reader img[alt="Camera based scan"] {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+
+#html5-qrcode-anchor-scan-type-change {
+    text-decoration: none !important;
+    color: #1d9bf0;
+}
+
+video {
+    width: 100% !important;
+    border: 1px solid #b2b2b2 !important;
+    border-radius: 0.25em;
+}
+
+/* new */
+/* General styles for the customer report */
+#customerReport {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 500px; /* Adjust this value to limit vertical height and enable scrolling */
+    white-space: nowrap; /* Prevents text from wrapping to ensure smooth horizontal scroll */
+}
+
+#customerTable {
+    width: 100%; /* Ensure the table takes up the full width */
+    border-collapse: collapse; /* Optional: Remove space between table borders */
+}
+
+#customerTable th, #customerTable td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Add border for better visibility */
+    text-align: left; /* Align text to the left */
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+    .customerReport {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .customerTable {
+        flex: 1 1 100%; /* Each item takes full width */
+    }
+}
+
+/*  */
+/* Add this to your styles.css file or within a <style> tag in the head section */
+#salesReportTab {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 500px; /* Adjust this value to limit vertical height and enable scrolling */
+    white-space: nowrap; /* Prevents text from wrapping to ensure smooth horizontal scroll */
+}
+
+#salesTable {
+    width: 100%; /* Ensure the table takes up the full width */
+    border-collapse: collapse; /* Optional: Remove space between table borders */
+}
+
+#salesTable th, #salesTable td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Add border for better visibility */
+    text-align: left; /* Align text to the left */
+}
+
+.tab-content {
+    padding: 20px;
+}
+
+/* css */
+.grouped-section {
+    border: 2px solid #026983;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 1px;
+    background-color: #f9f9f9;
+}
+
+.grouped-section h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.grouped-section label {
+    font-weight: bold;
+}
+
+.small-label {
+    font-size: 0.8em;  /* Adjust the size as needed */
+    font-weight: normal;  /* Optional: Change the font weight */
+    color: #444;  /* Optional: Change the color */
+}

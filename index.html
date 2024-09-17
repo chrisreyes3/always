@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Login Demo</title>
+    <h2 class="custom-heading">Always Water</h2>
+    <style>
+        .custom-heading {
+            font-family: 'Arial', sans-serif; /* Change to your preferred font */
+            color: #015551; /* Change to your preferred color */
+            text-align: center;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: auto;
+            overflow: hidden; /* Ensures the image fits within the circle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Makes sure the image covers the entire area */
+        }
+        .login-form {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 50px auto;
+        }
+
+        .login-form input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #026983;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            padding: 10px;
+            background-color: #026983;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-form button:hover {
+            background-color: #026983;
+        }
+
+        .reveal-login-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        .reveal-login-button button {
+            padding: 10px;
+            background-color: #026983;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 150px;
+        }
+
+        .reveal-login-button button:hover {
+            background-color: #005f6b;
+        }
+    </style>
+</head>
+<body>
+      <div class="logo">
+        <img src="images/user.gif" alt="Logo">
+    </div>
+    <div class="reveal-login-button">
+        <button id="revealLoginBtn">PRESS TO LOGIN </button>
+    </div>
+
+    <div class="login-form" id="loginForm">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="login()">E N T E R</button>
+    </div>
+
+    <script>
+        const revealLoginBtn = document.getElementById('revealLoginBtn');
+        const loginForm = document.getElementById('loginForm');
+
+        revealLoginBtn.addEventListener('click', function() {
+            loginForm.style.display = 'flex';
+        });
+
+        function login() {
+            const password = document.getElementById('password').value;
+            const correctPassword = 'admin123';
+
+            if (password === correctPassword) {
+                window.location.href = 'main.html';
+            } else {
+                alert('Incorrect password, please try again.');
+            }
+        }
+    </script>
+
+</body>
+</html>

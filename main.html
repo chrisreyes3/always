@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Refilling Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+     <!-- <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script> -->
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="showTab('customerForm')">
+            <img src="images/three-men-94.png" alt="Customer Icon" class="icon-img" /> Customer Form
+        </button>        
+        <button onclick="showTab('salesForm')">
+            <img src="images/sales-48.png" alt="Add Sales Icon" class="icon-img" /> Add Sales
+        </button>        
+        <button onclick="showTab('customerReport')">
+            <img src="images/custreport.png" alt="Add Sales Icon" class="icon-img" /> Customer Report
+        </button>
+        <button onclick="showTab('salesReportTab')">
+            <img src="images/salesreport.png" alt="Add Sales Icon" class="icon-img" /> Sales Report
+        </button>
+    </div>
+
+    <div id="customerForm" class="tab-content">
+        <div class="sales-report-header">
+            <h2>Customer Form</h2>
+            <img src="images/three-men-94.png" alt="Sales Report Animation" />
+            </div>
+        <form id="customerFormElement">
+        <fieldset class="grouped-section">
+                <legend><i class="fas fa-receipt"></i> Personal Information</legend>     
+            <label for="customerName"><i class="fa-regular fa-user"></i> Customer Name:</label>
+            <input type="text" id="customerName" name="customerName" required><br>
+            <label for="category"><i class="fa-regular fa-clipboard"></i> Category:</label>
+            <select id="category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Residential">Residential</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Government">Government</option>
+            </select><br>
+            <div id="contactPersonDiv" style="display: none;">
+                <label for="contactPerson"><i class="far fa-address-book"></i> Contact Person:</label>
+                <input type="text" id="contactPerson" name="contactPerson"><br>
+            </div>
+            <label for="tinNumber"><i class="fas fa-expand"></i> TIN Number:</label>
+            <input type="text" id="tinNumber" name="tinNumber"><br>
+        </fieldset>
+        <fieldset class="grouped-section">
+            <legend><i class="fas fa-receipt"></i> Address</legend>         
+            <label for="AddressInformation" class="highlight-label"> [ Address ] </Label>   
+            <label for="street"><i class="far fa-address-card"></i> Street:</label>
+            <input type="text" id="street" name="street"><br>
+            <label for="barangay"><i class="far fa-address-card"></i> Barangay:</label>
+            <input type="text" id="barangay" name="barangay"><br>
+            <label for="city"><i class="far fa-address-card"></i> City:</label>
+            <input type="text" id="city" name="city" required><br>
+        </fieldset>
+        <fieldset class="grouped-section">
+            <legend><i class="fas fa-receipt"></i> Contact Information & Prices</legend>         
+            <label for="email"><i class="far fa-paper-plane"></i> Email:</label>
+            <input type="email" id="email" name="email"><br>
+            <label for="contactNumber"><i class="fas fa-phone"></i> Contact Number:</label>
+            <input type="text" id="contactNumber" name="contactNumber" required><br>
+            <label for="pricePerBottle"><i class="far fa-credit-card"></i> Price per Bottle:</label>
+            <select id="pricePerBottle" name="pricePerBottle" required>
+                <option value="">Select Price</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="3/100">3/100</option>
+            </select><br>
+            <label for="status"><i class="fas fa-toggle-off"></i> Status:</label>
+            <select id="status" name="status" required>
+                <option value="">Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Non-Active">Non-Active</option>
+            </select><br>
+        </fieldset>
+            <!-- <button type="button" onclick="addCustomer()">Add Customer</button> -->
+            <button onclick="addCustomer()"><i class="fas fa-user-plus"></i> Add Customer</button>
+        </form>
+    </div>
+
+    <div id="customerReport" class="tab-content" style="display:none;">
+        <h2>Customer Report</h2>
+        <div id="customerTableWrapper">
+            <table id="customerTable">
+            <thead>
+                <tr>
+                    <th>Cust No</th>
+                    <th>Customer Name</th>
+                    <th>Category</th>
+                    <th>Contact Person</th>
+                    <th>TIN Number</th>
+                    <th>Street</th>
+                    <th>Barangay</th>
+                    <th>City</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th class="no-print">Price per Bottle</th>
+                    <th>Status</th>
+                    <th class="no-print">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+    <!-- Customer rows will be added here dynamically -->
+            </tbody>
+        </table>
+        <button onclick="exportCustomerReport()">Export Customer Report to Excel</button>
+        <button onclick="printCustomerReport()">Print Preview</button>
+    </div>
+    </div>
+
+    <div id="salesForm" class="tab-content" style="display:none;">
+        <div class="sales-report-header">
+        <h2>Sales Form</h2>
+        <img src="images/sales-48.png" alt="Sales Report Animation" />
+        </div>
+        <form id="salesFormElement">    
+
+            <fieldset class="grouped-section">
+                <legend><i class="fas fa-receipt"></i> Expenses</legend>
+                <button type="button" id="expensesBtn">Expenses</button>
+                <div id="expensesMenu" style="display: none; margin-top: 10px;">
+                    <label for="Fuel" class="small-label"><i class="far fa-edit"></i> Fuel:</label>
+                    <input type="text" id="Fuel" name="fuel" value="0"><br>
+            
+                    <label for="labTest" class="small-label"><i class="far fa-edit"></i> Laboratory Test:</label>
+                    <input type="text" id="labTest" name="labTest" value="0"><br>
+            
+                    <label for="supplies" class="small-label"><i class="far fa-edit"></i> Supplies:</label>
+                    <input type="text" id="supplies" name="supplies" value="0"><br>
+            
+                    <label for="othersmisc" class="small-label"><i class="far fa-edit"></i> Others:</label>
+                    <input type="text" id="othersmisc" name="othersmisc" value="0"><br>
+                </div>
+            </fieldset>
+            
+            <fieldset class="grouped-section">
+                <legend><i class="fas fa-receipt"></i> Receipts Information</legend>
+            <label for="salesDate" class="small-label"><i class="far fa-edit"></i> Date:</label>
+            <input type="date" id="salesDate" name="salesDate" required><br>
+            <label for="orderSlip" class="small-label"><i class="far fa-edit"></i> Order Slip:</label>
+            <input type="text" id="orderSlip" name="orderSlip"><br>
+            <label for="salesInvoice" class="small-label"><i class="far fa-edit"></i> Sales Invoice:</label>
+            <input type="text" id="salesInvoice" name="salesInvoice"><br>
+            <label for="orNumber" class="small-label"><i class="far fa-edit"></i> Official Receipt:</label>
+            <input type="text" id="orNumber" name="orNumber"><br>
+            <label for="drNumber" class="small-label"><i class="far fa-edit"></i> Delivery Receipt:</label>
+            <input type="text" id="drNumber" name="drNumber"><br>
+        </fieldset>
+
+         <fieldset class="grouped-section">
+            <legend><i class="fas fa-receipt"></i> Details</legend>
+            <label for="salesCustomerName"><i class="fa-regular fa-user"></i> Customer Name:</label>
+            <select id="salesCustomerName" name="salesCustomerName" required>
+                <!-- Customer names will be added here dynamically -->
+
+                <!-- Price per Bottle -->
+            </select>
+            <label for="salesPricePerBottle"><i class="far fa-credit-card"></i> Price Per Bottle:</label>
+            <input type="text" id="salesPricePerBottle" readonly>
+            <label for="BottleInformation" class="highlight-label">[ Bottle Sizes ]</label>
+            <!-- </select><br> -->
+            <label for="slim"><i class="fas fa-wine-glass-alt"></i> Slim:</label>
+            <input type="number" id="slim" name="slim"><br>
+            <label for="round"><i class="fas fa-wine-glass"></i> Round:</label>
+            <input type="number" id="round" name="round"><br>
+            <label for="otherItems"><i class="fas fa-wine-bottle"></i> Other Items:</label>
+            <input type="text" id="otherItems" name="otherItems"><br>
+        </fieldset>
+
+        <fieldset class="grouped-section">
+            <legend><i class="fas fa-receipt"></i> Prices</legend>
+            <label for="PricesInformation" class="highlight-label">[ Prices ]</label>      
+            <label for="cashSales"><i class="fas fa-money-check-alt"></i> Cash Sales:</label>
+            <input type="number" id="cashSales" name="cashSales"><br>
+            <label for="accountReceivable"><i class="fas fa-money-check-alt"></i> Account Receivable:</label>
+            <input type="number" id="accountReceivable" name="accountReceivable"><br>
+            <label for="totalSales"><i class="fas fa-money-check-alt"></i> Total Sales:</label>
+            <input type="number" id="totalSales" name="totalSales"><br>
+            <label for="remarks"><i class="far fa-closed-captioning"></i> Remarks:</label>
+            <input type="text" id="remarks" name="remarks"><br>
+        </fieldset>   
+
+            <!-- <button type="button" onclick="addSales()">Add Sales</button> -->
+            <button onclick="addSales()"><i class="fas fa-dollar-sign"></i> Add Sales</button>
+    <!-- start qr new -->
+    <label for="qrCode">QR Code:</label>
+    <input type="text" id="qrCode" name="qrCode" readonly><br>
+    <h3>Scan QR Codes</h3>
+    <div id="my-qr-reader"></div>
+    <button type="button" onclick="startScan()">Start Scan</button>
+
+
+    <!-- fin qr new -->
+
+        </div>
+        <script
+            src="https://unpkg.com/html5-qrcode">
+        </script>
+        </form>      
+    </div>
+
+    <div id="salesReportTab" class="tab-content" style="display:none;">
+        <h2>Sales Report</h2>
+        <table id="salesTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Order Slip</th>
+                    <th>OR Number</th>
+                    <th>DR Number</th>
+                    <th>QR Code</th>
+                    <th>Customer Name</th>
+                    <th>Price Per Bottle</th>
+                    <th>Slim</th>
+                    <th>Round</th>
+                    <th>Other Items</th>
+                    <th>Cash Sales</th>
+                    <th>Account Receivable</th>
+                    <th>Total Sales</th>
+                    <th>Remarks</th>
+                    <th>Fuel</th>
+                    <th>LabTest</th>
+                    <th>Supplies</th>
+                    <th>Others</th>
+                    <th class="no-print">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- Sales rows will be added here  -->
+            </tbody>
+        </table>
+        <button onclick="exportSalesReport()">Export Sales Report to Excel</button>
+        <button onclick="printSalesReport()">Print Preview</button>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
